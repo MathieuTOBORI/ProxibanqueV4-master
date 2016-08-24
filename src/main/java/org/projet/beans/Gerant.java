@@ -2,24 +2,29 @@ package org.projet.beans;
 
 import java.util.List;
 
-public class Gerant extends ConseillerClient {
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-	private List<ConseillerClient> listeConseillerClients;
+@Entity
+@Table(name = "gerant")
+public class Gerant extends ConseillerClientTest {
+
+	private List<ConseillerClientTest> listeConseillerClients;
 
 	public Gerant() {
 
 	}
 
-	public Gerant(List<ConseillerClient> listeConseillerClients) {
+	public Gerant(List<ConseillerClientTest> listeConseillerClients) {
 		super();
 		this.listeConseillerClients = listeConseillerClients;
 	}
 
-	public List<ConseillerClient> getListeConseillerClients() {
+	public List<ConseillerClientTest> getListeConseillerClients() {
 		return listeConseillerClients;
 	}
 
-	public void setListeConseillerClients(List<ConseillerClient> listeConseillerClients) {
+	public void setListeConseillerClients(List<ConseillerClientTest> listeConseillerClients) {
 		this.listeConseillerClients = listeConseillerClients;
 	}
 	

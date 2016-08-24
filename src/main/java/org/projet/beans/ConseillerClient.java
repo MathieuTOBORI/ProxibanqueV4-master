@@ -2,6 +2,13 @@ package org.projet.beans;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+
+
+@Entity
+@Table(name = "conseillerClient")
 public class ConseillerClient extends Personne{
 	
 private String password;
@@ -55,13 +62,6 @@ public List<CompteBancaire> getListeComptes() {
 public void setListeComptes(List<CompteBancaire> listeComptes) {
 	this.listeComptesBancaires = listeComptes;
 }
-
-
-
-
-
-
-
 
 
 }

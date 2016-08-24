@@ -1,5 +1,7 @@
 package org.projet.dao;
 
-public interface IConseillerClientDAO {
+import org.projet.beans.ConseillerClientTest;
+
+public interface IConseillerClientDAO extends IEntityProjetDao<ConseillerClientTest> {
 
 }

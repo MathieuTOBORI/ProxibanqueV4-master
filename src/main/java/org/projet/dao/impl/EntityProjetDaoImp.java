@@ -1,4 +1,4 @@
-package org.projet.dao;
+package org.projet.dao.impl;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -7,19 +7,23 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.springframework.stereotype.Repository;
+import org.hibernate.HibernateException;
+import org.projet.dao.IEntityProjetDao;
+
+
 import org.springframework.transaction.annotation.Transactional;
 
 import javassist.bytecode.SignatureAttribute.TypeVariable;
 
-@Repository("daoClient")
-public class ClientDaoImp<Client> implements IClientDAO<Client> {
+
+
+public class EntityProjetDaoImp<E> implements IEntityProjetDao<E> {
 
 	@PersistenceContext(unitName = "persistenceUnit")
 	protected EntityManager entityManager;
 
-	protected Client instance;
-	private Class<Client> entityClass;
+	protected E instance;
+	private Class<E> entityClass;
 
 	public EntityManager getEntityManager() {
 		return entityManager;
@@ -29,16 +33,16 @@ public class ClientDaoImp<Client> implements IClientDAO<Client> {
 		this.entityManager = entityManager;
 	}
 
-	public Client getInstance() {
+	public E getInstance() {
 		return instance;
 	}
 
-	public void setInstance(Client instance) {
+	public void setInstance(E instance) {
 		this.instance = instance;
 	}
 
 	@SuppressWarnings("unchecked")
-	public Class<Client> getEntityClass() throws Exception {
+	public Class<E> getEntityClass() throws Exception {
 		if (entityClass == null) {
 			Type type = getClass().getGenericSuperclass();
 			if (type instanceof ParameterizedType) {
@@ -47,10 +51,10 @@ public class ClientDaoImp<Client> implements IClientDAO<Client> {
 					if (paramType.getActualTypeArguments()[1] instanceof TypeVariable) {
 						throw new IllegalArgumentException("Can't find class using reflection");
 					} else {
-						entityClass = (Class<Client>) paramType.getActualTypeArguments()[1];
+						entityClass = (Class<E>) paramType.getActualTypeArguments()[1];
 					}
 				} else {
-					entityClass = (Class<Client>) paramType.getActualTypeArguments()[0];
+					entityClass = (Class<E>) paramType.getActualTypeArguments()[0];
 				}
 			} else {
 				throw new Exception("Can't find class using reflection");
@@ -59,44 +63,44 @@ public class ClientDaoImp<Client> implements IClientDAO<Client> {
 		return entityClass;
 	}
 	
-	public void setEntityClass(Class<Client> entityClass) {
+	public void setEntityClass(Class<E> entityClass) {
 		this.entityClass = entityClass;
 	}
-	@Transactional(readOnly = true)
-	public void addClient(Object c) throws Exception {
+	@Transactional
+	public void add(E c) throws HibernateException {
 		getEntityManager().persist(c);
 
 	}
-	@Transactional(readOnly = true)
-	public void editClient(Object c) throws Exception {
+	@Transactional
+	public void edit(E c) throws HibernateException {
 		getEntityManager().merge(c);
 
 	}
-	@Transactional(readOnly = true)
-	public void deleteClient(Object idClient) throws Exception {
-		getEntityManager().remove((Client) getEntityManager().find(getEntityClass(), idClient));
+	@Transactional
+	public void delete(Object idClient) throws Exception {
+		getEntityManager().remove((E) getEntityManager().find(getEntityClass(), idClient));
 
 	}
 	@Transactional(readOnly = true)
-	public Client searchClientByID(Object id) throws Exception {
-		return (Client) getEntityManager().find(getEntityClass(), id);
+	public E searchClientByID(Object id) throws Exception {
+		return (E) getEntityManager().find(getEntityClass(), id);
 	}
 	@Transactional(readOnly = true)
 	@SuppressWarnings("unchecked")
-	public List<Client> ListClients() throws Exception {
+	public List<E> Lists() throws Exception {
 		return getEntityManager().createQuery("Select t from " + getEntityClass().getSimpleName() + " t")
 				.getResultList();
 	}
 	@Transactional(readOnly = true)
 	@SuppressWarnings("unchecked")
-	public List<Client> searchByConseiller(String conseiller, Object val) throws Exception {
-		return (List<Client>) getEntityManager()
+	public List<E> searchByConseiller(String conseiller, Object val) throws Exception {
+		return (List<E>) getEntityManager()
 				.createQuery("select x from " + getEntityClass().getSimpleName() + " x where x." + conseiller + " = ?1")
 				.setParameter(1, val).getResultList();
 	}
 	@Transactional(readOnly = true)
 	@SuppressWarnings("unchecked")
-	public List<Client> searchInRange(int firstResult, int maxResults) throws Exception {
+	public List<E> searchInRange(int firstResult, int maxResults) throws Exception {
 		return getEntityManager().createQuery("Select t from " + getEntityClass().getSimpleName() + " t")
 				.setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
 	}

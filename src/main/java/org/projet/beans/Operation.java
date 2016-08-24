@@ -1,14 +1,19 @@
 package org.projet.beans;
 
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 public abstract class Operation {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idOperation;
+	
 	private String dateOperation;
 	private double montant;
 	private CompteBancaire compte;
-	private ConseillerClient conseillerClient;
+	private ConseillerClientTest conseillerClient;
 
 	// ConstructorExecutor par defaut
 	public Operation() {
@@ -16,7 +21,7 @@ public abstract class Operation {
 
 	// Constructeur Completr
 	public Operation(long idOperation, String dateOperation, double montant, CompteBancaire compte,
-			ConseillerClient conseillerClient) {
+			ConseillerClientTest conseillerClient) {
 		super();
 		this.idOperation = idOperation;
 		this.dateOperation = dateOperation;
@@ -57,11 +62,11 @@ public abstract class Operation {
 		this.compte = compte;
 	}
 
-	public ConseillerClient getConseillerClient() {
+	public ConseillerClientTest getConseillerClient() {
 		return conseillerClient;
 	}
 
-	public void setConseillerClient(ConseillerClient conseillerClient) {
+	public void setConseillerClient(ConseillerClientTest conseillerClient) {
 		this.conseillerClient = conseillerClient;
 	}
 

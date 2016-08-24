@@ -1,6 +1,15 @@
 package org.projet.beans;
 
-public  class CompteCourant {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+
+@Entity
+@Table(name = "compteCourant")
+@Component
+public  class CompteCourant extends CompteBancaire{
+	
 	private double authorisationDecouvert;
 
 	public CompteCourant(double authorisationDecouvert) {

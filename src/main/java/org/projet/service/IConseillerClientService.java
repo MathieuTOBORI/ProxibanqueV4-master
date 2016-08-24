@@ -1,5 +1,7 @@
 package org.projet.service;
 
-public interface IConseillerClientService {
+import org.projet.beans.ConseillerClientTest;
+
+public interface IConseillerClientService extends EntityProjetService<ConseillerClientTest> {
 
 }

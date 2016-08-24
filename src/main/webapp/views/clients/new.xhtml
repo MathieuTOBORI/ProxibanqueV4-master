@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	>
+<h:body>
+	<ui:composition template="/WEB-INF/tags/layout.xhtml">
+		<ui:define name="content">
+	
+				<h:form id="form1" style="">
+					<p:growl id="messages" showDetail="true" />
+
+
+					<p:panel id="panel">
+					<br/>
+   					
+
+
+						<h:panelGrid id="display" columns="2" cellpadding="4">
+
+							<h:outputText value="Nom" for="nom"
+								style="padding-left: 30px; padding-right: 30px;" />
+
+							<p:inputText id="nom" value="#{clientController.beanClient.nom}"
+								required="true" label="Nom"
+								requiredMessage="Required" />
+								
+							<h:outputText value="Prenom" for="prenom"
+								style="padding-left: 30px; padding-right: 30px;" />	
+								
+						    <p:inputText id="prenom" value="#{clientController.beanClient.prenom}"
+								required="true" label="Prenom"
+								requiredMessage="Required" />
+								
+								<h:outputText value="Tel" for="tel"
+								style="padding-left: 30px; padding-right: 30px;" />	
+								
+						    <p:inputText id="tel" value="#{clientController.beanClient.tel}"
+								required="true" label="Tel"
+								requiredMessage="Required" />
+								
+								<h:outputText value="Email" for="email"
+								style="padding-left: 30px; padding-right: 30px;" />	
+								
+						    <p:inputText id="email" value="#{clientController.beanClient.email}"
+								required="true" label="email"
+								requiredMessage="Required" />
+						    							
+						    							
+	
+							<p:outputPanel layout="block" style="text-align:center">
+							<br />
+							<br />
+							<p:commandButton value="Reset" styleClass=""
+								update=":form1:panel" process="@this"
+								actionListener="#{clientController.reset}" />
+							<p:commandButton value="Save" styleClass=""
+								actionListener="#{clientController.save}"
+								update=":form1:messages, :form1:panel" />
+						</p:outputPanel>
+
+
+						
+						</h:panelGrid>
+
+
+					</p:panel>
+
+				</h:form> 
+			
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

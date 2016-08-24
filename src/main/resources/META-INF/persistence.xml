@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
-             version="1.0">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
 
-	<persistence-unit name="persistenceUnit" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="persistenceUnit"
+		transaction-type="RESOURCE_LOCAL">
 
 		<class>org.formation.model.Item</class>
 		<class>org.formation.model.Order</class>
- 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<class>org.projet.beans.ClientTest</class>
+		<class>org.projet.beans.Adresse</class>
+		<class>org.projet.beans.CompteBancaire</class>
+		<class>org.projet.beans.CompteCourant</class>
+		<class>org.projet.beans.CompteEpargne</class>
+		<class>org.projet.beans.ConseillerClientTest</class>
+		<class>org.projet.beans.Gerant</class>
+<!-- 		<class>org.projet.beans.Personne</class> -->
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 	</persistence-unit>
 
 </persistence>

@@ -1,5 +1,8 @@
 package org.projet.beans;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Adresse {
 
 	private String rue;

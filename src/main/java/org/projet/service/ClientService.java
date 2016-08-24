@@ -2,53 +2,56 @@ package org.projet.service;
 
 import java.util.List;
 
-import org.projet.beans.Client;
-import org.projet.dao.IClientDAO;
+import org.projet.beans.ClientTest;
+import org.projet.dao.IEntityProjetDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
-public class ClientService implements IclientService<Client> {
-	
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+@Component(value = "clientService")
+@Transactional
+public class ClientService implements IClientService {
+
 	@Autowired
-	@Qualifier(value="daoClient")
-	private IClientDAO<Client> daoClient;
+	private IEntityProjetDao<ClientTest> clientDao;
 
-	public void addClient(Client c) throws Exception {
-		daoClient.addClient(c);
-		
+	public void add(ClientTest c) throws Exception {
+		clientDao.add(c);
+
 	}
 
-	public void editClient(Client c) throws Exception {
-		daoClient.editClient(c);
-		
+	public void delete(Object idClient) throws Exception {
+		clientDao.delete(idClient);
+
 	}
 
-	public void deleteClient(Object idClient) throws Exception {
-		daoClient.deleteClient(idClient);
-		
+	public ClientTest searchClientByID(Object id) throws Exception {
+
+		return clientDao.searchClientByID(id);
 	}
 
-	public Client searchClientByID(Object id) throws Exception {
-		
-		return daoClient.searchClientByID(id);
+	public List<ClientTest> Lists() throws Exception {
+
+		return clientDao.Lists();
 	}
 
-	public List<Client> ListClients() throws Exception {
-		
-		return daoClient.ListClients();
+	public List<ClientTest> searchByConseiller(String conseiller, Object val) throws Exception {
+
+		return clientDao.searchByConseiller(conseiller, val);
 	}
 
-	public List<Client> searchByConseiller(String conseiller, Object val) throws Exception {
-	
-		return daoClient.searchByConseiller(conseiller, val);
-	}
-
-	public List<Client> searchInRange(int firstResult, int maxResults) throws Exception {
-				return daoClient.searchInRange(firstResult, maxResults);
+	public List<ClientTest> searchInRange(int firstResult, int maxResults) throws Exception {
+		return clientDao.searchInRange(firstResult, maxResults);
 	}
 
 	public long count() throws Exception {
-			return daoClient.count();
+		return clientDao.count();
+	}
+
+	public void edit(ClientTest c) throws Exception {
+		clientDao.edit(c);
+
 	}
 
 }

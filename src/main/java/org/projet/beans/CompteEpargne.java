@@ -1,5 +1,13 @@
 package org.projet.beans;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+
+@Entity
+@Table(name = "compteEpargne")
+@Component
 public class CompteEpargne extends CompteBancaire{
 	
 	private double tauxRemuneration;
